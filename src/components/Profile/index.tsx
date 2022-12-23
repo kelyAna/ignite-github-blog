@@ -9,14 +9,28 @@ import { AiOutlineGithub } from 'react-icons/ai'
 import { HiOfficeBuilding } from 'react-icons/hi'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { RxExternalLink } from 'react-icons/rx'
+import { useEffect, useState } from 'react'
 
 export const Profile = () => {
+  const [githubData, setGithubData] = useState([])
+
+  const fetchData = () => {
+    return fetch('https://api.github.com/users/kelyAna')
+      .then((response) => response.json())
+      .then((data) => setGithubData(data))
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  console.log(githubData)
   return (
     <ProfileContainer>
-      <ProfileImage src="https://avatars.githubusercontent.com/u/48291057?s=400&u=0c61eb305a9b1e13b37652c4f5b9d2667d7fb187&v=4" />
+      <ProfileImage src={githubData.avatar_url} />
       <ProfileBio>
         <ProfileName>
-          <h3>Ana Kely Lopes</h3>
+          <h3>{githubData.name}</h3>
           <a href="">
             <h4>Link</h4> <RxExternalLink />
           </a>
@@ -29,15 +43,15 @@ export const Profile = () => {
         <ProfileInfo>
           <div>
             <AiOutlineGithub size={18} />
-            <span>kelyAna</span>
+            <span>{githubData.login}</span>
           </div>
           <div>
             <HiOfficeBuilding size={18} />
-            <span>VTEX</span>
+            <span>{githubData.company}</span>
           </div>
           <div>
             <BsFillPeopleFill size={18} />
-            <span>32 seguidores</span>
+            <span>{githubData.followers} seguidores</span>
           </div>
         </ProfileInfo>
       </ProfileBio>

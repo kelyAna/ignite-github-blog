@@ -6,4 +6,8 @@ export const HomeContainer = styled.div`
 
   align-items: center;
   text-align: center;
+  display: flex;
+
+  justify-items: center;
+  justify-content: center;
 `
