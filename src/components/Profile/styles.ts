@@ -44,6 +44,10 @@ export const ProfileName = styled.div`
     justify-content: space-between;
   }
 
+  a:last-child {
+    margin-left: 380px;
+  }
+
   margin-bottom: 20px;
 `
 

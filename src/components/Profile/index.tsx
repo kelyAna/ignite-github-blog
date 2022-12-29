@@ -11,8 +11,17 @@ import { BsFillPeopleFill } from 'react-icons/bs'
 import { RxExternalLink } from 'react-icons/rx'
 import { useEffect, useState } from 'react'
 
+interface GithubDataType {
+  avatar_url: string
+  name: string
+  login: string
+  company: string
+  followers: number
+  bio: string
+}
+
 export const Profile = () => {
-  const [githubData, setGithubData] = useState([])
+  const [githubData, setGithubData] = useState<GithubDataType>()
 
   const fetchData = () => {
     return fetch('https://api.github.com/users/kelyAna')
@@ -24,34 +33,29 @@ export const Profile = () => {
     fetchData()
   }, [])
 
-  console.log(githubData)
   return (
     <ProfileContainer>
-      <ProfileImage src={githubData.avatar_url} />
+      <ProfileImage src={githubData?.avatar_url} />
       <ProfileBio>
         <ProfileName>
-          <h3>{githubData.name}</h3>
-          <a href="">
-            <h4>Link</h4> <RxExternalLink />
+          <h3>{githubData?.name}</h3>
+          <a href="https://github.com/kelyAna">
+            <h5>GITHUB</h5> <RxExternalLink />
           </a>
         </ProfileName>
-        <p>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </p>
+        <p>{githubData?.bio} </p>
         <ProfileInfo>
           <div>
             <AiOutlineGithub size={18} />
-            <span>{githubData.login}</span>
+            <span>{githubData?.login}</span>
           </div>
           <div>
             <HiOfficeBuilding size={18} />
-            <span>{githubData.company}</span>
+            <span>{githubData?.company}</span>
           </div>
           <div>
             <BsFillPeopleFill size={18} />
-            <span>{githubData.followers} seguidores</span>
+            <span>{githubData?.followers} seguidores</span>
           </div>
         </ProfileInfo>
       </ProfileBio>

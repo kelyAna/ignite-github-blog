@@ -7,9 +7,16 @@ export const PostInfoContent = styled.div`
   background: #112131;
   border-radius: 10px;
 
+  cursor: pointer;
+
   padding: 32px;
   p {
     font-size: '1rem';
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    color: #7b96b2;
   }
 `
 
