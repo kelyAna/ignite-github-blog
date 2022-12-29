@@ -1,38 +1,49 @@
+import moment from 'moment'
 import { AiOutlineGithub } from 'react-icons/ai'
 import { BsCalendarEventFill, BsFillChatFill } from 'react-icons/bs'
 import { IoIosArrowBack } from 'react-icons/io'
 import { RxExternalLink } from 'react-icons/rx'
-import { PostContainer, PostContentHeader } from '../../screens/Post/styles'
-import { ProfileBio, ProfileInfo } from '../Profile/styles'
+import {
+  PostContainer,
+  PostContent,
+  PostContentHeader,
+  PostInfo,
+} from '../../screens/Post/styles'
 
-export const PostHeader = () => {
+type PostHeaderProps = {
+  title: string
+  updatedAt: number | Date
+  comments: number
+}
+
+export const PostHeader = ({ title, comments, updatedAt }: PostHeaderProps) => {
   return (
     <PostContainer>
-      <ProfileBio>
+      <PostContent>
         <PostContentHeader>
           <a href="/">
             <IoIosArrowBack /> Voltar
           </a>
-          <a href="">
-            <h4>Link</h4> <RxExternalLink />
+          <a href="https://github.com/kelyAna/ignite-github-blog/issues">
+            <h5>VER NO GITHUB</h5> <RxExternalLink />
           </a>
         </PostContentHeader>
-        <h3>JavaScript data types and data structures</h3>
-        <ProfileInfo>
+        <h3>{title}</h3>
+        <PostInfo>
           <div>
             <AiOutlineGithub size={18} />
             <span>kelyAna</span>
           </div>
           <div>
             <BsCalendarEventFill size={18} />
-            <span>Há 1 dia</span>
+            <span>{moment(updatedAt).startOf('day').fromNow()}</span>
           </div>
           <div>
             <BsFillChatFill size={18} />
-            <span>5 comentários</span>
+            <span>{comments} comentários</span>
           </div>
-        </ProfileInfo>
-      </ProfileBio>
+        </PostInfo>
+      </PostContent>
     </PostContainer>
   )
 }

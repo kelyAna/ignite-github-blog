@@ -1,18 +1,31 @@
+import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 import { PostInfoContent, PostInfoHeader } from './styles'
 
-export const PostInfo = () => {
+type PostInfoProps = {
+  title: string
+  description: string
+  createdAt: number | Date
+  numberIssue: number
+}
+
+export const PostInfo = ({
+  title,
+  description,
+  createdAt,
+  numberIssue,
+}: PostInfoProps) => {
+  const navegate = useNavigate()
+  const postClick = () => {
+    navegate(`/post?number=${numberIssue}`)
+  }
   return (
-    <PostInfoContent>
+    <PostInfoContent onClick={postClick}>
       <PostInfoHeader>
-        <h4>JavaScript data types and data structures</h4>
-        <span>Há 1 dia</span>
+        <h4>{title}</h4>
+        <span>{moment(createdAt).startOf('day').fromNow()}</span>
       </PostInfoHeader>
-      <p>
-        Programming languages all have built-in data structures, but these often
-        differ from one language to another. This article attempts to list the
-        built-in data structures available in JavaScript and what properties
-        they have. These can be used to build other data structures.
-      </p>
+      <p>{description}</p>
     </PostInfoContent>
   )
 }
